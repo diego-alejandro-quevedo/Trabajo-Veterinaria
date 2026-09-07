@@ -42,7 +42,7 @@ public class Mascota {
     private double peso;
 
     @ManyToOne
-    @JoinColumn(name = "propietario_id")
+    @JoinColumn(name = "propietarioId")
     private Propietario propietario;
 
     @OneToOne(mappedBy = "mascota", cascade = CascadeType.ALL)

@@ -1,6 +1,7 @@
 package com.example.Veterinaria.Service.ServiceImp;
 
 import com.example.Veterinaria.Entity.Mascota;
+import com.example.Veterinaria.Exception.ResourceNotFoundException;
 import com.example.Veterinaria.Repository.MascotaRepository;
 import com.example.Veterinaria.Service.MascotaService;
 import lombok.AllArgsConstructor;
@@ -37,17 +38,27 @@ public class MascotaServiceImp implements MascotaService {
     public void eliminarMascota(Long id) {
         if(!mascotaRepository.existsById(id)){
             throw new RuntimeException( "No existe el usuario con el id " + id);
-
         }
 
         mascotaRepository.deleteById(id);
-
     }
-
-
 
     @Override
     public Mascota actualizarMascota(Long id, Mascota mascota) {
-        return null;
+        Mascota mascotaac = mascotaRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Mascota no encontrada con el id: " + id));
+
+        // Actualiza los campos principales de la entidad Mascota
+        mascota.setNombre(mascotaac.getNombre());
+        mascota.setEspecie(mascotaac.getEspecie());
+        mascota.setRaza(mascotaac.getRaza());
+        mascota.setEdad(mascotaac.getEdad());
+        mascota.setPeso(mascotaac.getPeso());
+
+        if (mascotaac.getPropietario() != null) {
+            mascota.setPropietario(mascotaac.getPropietario());
+        }
+
+        return mascotaRepository.save(mascota);
     }
 }

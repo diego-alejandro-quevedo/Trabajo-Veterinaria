@@ -2,7 +2,6 @@ package com.example.Veterinaria.Controller;
 
 import com.example.Veterinaria.Entity.Mascota;
 import com.example.Veterinaria.Entity.Propietario;
-import com.example.Veterinaria.Service.MascotaService;
 import com.example.Veterinaria.Service.PropietarioService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,6 +19,7 @@ import java.util.Optional;
 public class PropietarioController {
 
     private final PropietarioService propietarioService;
+
 
     @GetMapping("/ListaPropietarios")
     public ResponseEntity<List<Propietario>> listarPropietarios() {
@@ -45,6 +45,13 @@ public class PropietarioController {
     public ResponseEntity<Void> eliminarPropietario(@PathVariable Long id) {
         propietarioService.eliminarPropietario(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/actualizarPropietario/{id}")
+    public ResponseEntity<Propietario> actualizarPropietario(@PathVariable Long id, @RequestBody
+    Propietario propietarioDetalles) {
+        Propietario propietarioActualizado = propietarioService.actualizarPropietario(id, propietarioDetalles);
+        return ResponseEntity.ok(propietarioActualizado);
     }
 
 

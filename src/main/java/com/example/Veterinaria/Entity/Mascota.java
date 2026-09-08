@@ -33,7 +33,7 @@ public class Mascota {
     @NotBlank(message = "El Raza no puede ser nulo")
     @Size(min =2 ,max =20 )
     @Column(name= "raza",nullable = false)
-    private String raaza;
+    private String raza;
 
     @NotBlank(message = "la edad no puede ser nulo")
     private Integer edad;

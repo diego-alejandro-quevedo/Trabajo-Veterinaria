@@ -32,7 +32,7 @@ public class Veterinario {
     @Column(name= "TargetaProfecional",nullable = false)
     private String targetaProfecional;
 
-    @NotBlank(message = "El Telefono no puede ser nulo")
+    @NotBlank(message = "El Especialidad no puede ser nulo")
     @Size(min =10 ,max =10 )
     @Column(name= "Especialidad",nullable = false)
     private String Especialidad;

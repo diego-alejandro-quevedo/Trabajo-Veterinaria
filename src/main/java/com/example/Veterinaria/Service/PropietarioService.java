@@ -24,7 +24,7 @@ public interface PropietarioService {
 
 // Actualizar datos Propietario
 
-    Propietario actualizarPropietario(Long id, Propietario mascota);
+    Propietario actualizarPropietario(Long id, Propietario propietario);
 
 }
 

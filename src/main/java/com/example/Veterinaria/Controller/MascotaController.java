@@ -49,17 +49,10 @@ public class MascotaController {
         return ResponseEntity.noContent().build();
     }
 
-    /*
-    * @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<Void> eliminarUsuario(@PathVariable Long id) {
-        usuarioService.eliminarUsuario(id);
-        return ResponseEntity.noContent().build();
+    @PutMapping("/acutalizarMascota/{id}")
+    public ResponseEntity<Mascota> actualizarMascota(@PathVariable Long id, @RequestBody Mascota mascotaDetalles) {
+        Mascota mascotaActualizada = mascotaService.actualizarMascota(id, mascotaDetalles);
+        return ResponseEntity.ok(mascotaActualizada);
     }
-
-    @PutMapping("/actualizar/{id}")
-    public ResponseEntity<Usuario> actualizarUsuario(@PathVariable Long id, @Valid @RequestBody Usuario usuario) {
-        Usuario usuarioActualizado = usuarioService.actualizarUsuario(id, usuario);
-        return ResponseEntity.ok(usuarioActualizado);
-    }*/
 
 }

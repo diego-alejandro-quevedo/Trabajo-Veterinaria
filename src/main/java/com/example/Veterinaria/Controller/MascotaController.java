@@ -55,4 +55,18 @@ public class MascotaController {
         return ResponseEntity.ok(mascotaActualizada);
     }
 
+    @GetMapping("/buscarpropietario/{id}")
+    public ResponseEntity<List<Mascota>> listarPorPropietario(@PathVariable Long id) {
+        List<Mascota> mascotas = mascotaService.listarPorPropietario(id);
+        return ResponseEntity.ok(mascotas);
+    }
+
+    @PostMapping("/{mascotaId}/asignarveterinarios/{veterinarioId}")
+    public ResponseEntity<Mascota> asignarMascotaxVeterinario(
+            @PathVariable Long mascotaId,
+            @PathVariable Long veterinarioId) {
+
+        Mascota mascotaActualizada = mascotaService.asignarMascotaxVeterinario(mascotaId, veterinarioId);
+        return ResponseEntity.ok(mascotaActualizada);
+    }
 }

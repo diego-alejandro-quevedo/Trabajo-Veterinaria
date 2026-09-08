@@ -5,6 +5,7 @@ import com.example.Veterinaria.Entity.HistoriaClinica;
 import com.example.Veterinaria.Exception.ResourceNotFoundException;
 import com.example.Veterinaria.Repository.HistoriaRepository;
 import com.example.Veterinaria.Service.HistoriaService;
+
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,7 @@ public class HistoriaServiceImp implements HistoriaService {
     }
 
     @Override
-    public HistoriaClinica crearHistoria(HistoriaClinica historia) {
+    public HistoriaClinica crearHistoria( HistoriaClinica historia) {
         return historiaRepository.save(historia);
     }
 

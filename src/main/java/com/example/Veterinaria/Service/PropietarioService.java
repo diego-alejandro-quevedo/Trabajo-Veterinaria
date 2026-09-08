@@ -3,7 +3,6 @@ package com.example.Veterinaria.Service;
 import com.example.Veterinaria.Entity.Propietario;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface PropietarioService {
     // Listar propirtaros
@@ -12,7 +11,7 @@ public interface PropietarioService {
 
 // litar propietario por Id
 
-    Optional<Propietario> buscarPropietarioPorId(Long id);
+    Propietario buscarPropietarioPorId(Long id);
 
 // Crear una Propietario
 

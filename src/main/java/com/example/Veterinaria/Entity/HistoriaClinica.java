@@ -1,9 +1,12 @@
 package com.example.Veterinaria.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.time.LocalDate;
 
@@ -20,17 +23,19 @@ public class HistoriaClinica {
     private LocalDate fechaApertura;
 
     @NotBlank(message = "debe dejar los antecedente ")
-    @Size(min =4 ,max =80 )
+
     @Column(name= "antecedentes",nullable = false)
     private String antecedente;
 
 
     @NotBlank(message = "bebe dejar una obsercacion")
-    @Size(min =2 ,max =20 )
     @Column(name= "observaciones",nullable = false)
     private String observacion;
 
     @OneToOne
+    @JsonBackReference // Le indica a Jackson que no vuelva a serializar el Propietario
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @JoinColumn(name = "mascota_id", unique = true)
     private Mascota mascota;
 

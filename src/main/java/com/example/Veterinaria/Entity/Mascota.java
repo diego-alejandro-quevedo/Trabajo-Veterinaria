@@ -1,11 +1,15 @@
 package com.example.Veterinaria.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +47,9 @@ public class Mascota {
     private double peso;
 
     @ManyToOne
+    @JsonBackReference // Le indica a Jackson que no vuelva a serializar el Propietario
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @JoinColumn(name = "propietarioId")
     private Propietario propietario;
 
@@ -55,7 +62,10 @@ public class Mascota {
             joinColumns = @JoinColumn(name = "mascotaId"),
             inverseJoinColumns = @JoinColumn(name = "veterinarioId")
     )
+    @JsonIgnoreProperties("mascotas")
     private List<Veterinario> veterinarios = new ArrayList<>();
+
+
 
 
 

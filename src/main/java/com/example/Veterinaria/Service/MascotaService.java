@@ -27,4 +27,14 @@ public interface MascotaService {
 
     Mascota actualizarMascota(Long id, Mascota mascota);
 
+// Actualizar mascota
+
+    List<Mascota> listarPorPropietario(Long propietarioId );
+
+// asignar  mascota a veterinario
+
+    Mascota asignarMascotaxVeterinario(Long mascotaId, Long veterinarioId );
+
+
+
 }

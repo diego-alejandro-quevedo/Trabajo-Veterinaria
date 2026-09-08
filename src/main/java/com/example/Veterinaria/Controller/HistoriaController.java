@@ -4,6 +4,7 @@ import com.example.Veterinaria.Entity.HistoriaClinica;
 
 import com.example.Veterinaria.Entity.Propietario;
 import com.example.Veterinaria.Service.HistoriaService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +35,7 @@ public class HistoriaController {
     }
 
     @PostMapping("/crearHistoria")
-    public ResponseEntity<HistoriaClinica> crearPropietario(HistoriaClinica historia){
+    public ResponseEntity<HistoriaClinica> crearPropietario( @Valid @RequestBody HistoriaClinica historia){
 
         HistoriaClinica nuevaHistoria = historiaService.crearHistoria(historia);
         return ResponseEntity.status(HttpStatus.CREATED).body(nuevaHistoria);

@@ -1,6 +1,6 @@
 package com.example.Veterinaria.Controller;
 
-import com.example.Veterinaria.Entity.Mascota;
+
 import com.example.Veterinaria.Entity.Propietario;
 import com.example.Veterinaria.Service.PropietarioService;
 import lombok.AllArgsConstructor;
@@ -29,19 +29,21 @@ public class PropietarioController {
 
     @GetMapping("/ListarPropietarioId/{id}")
     public ResponseEntity<Propietario> buscarPropietarioPorId(@PathVariable Long id) {
-        return propietarioService.buscarPropietarioPorId(id).map(ResponseEntity::ok)
+        return Optional.ofNullable(propietarioService.buscarPropietarioPorId(id))
+                .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
+
     }
 
     @PostMapping("/crearPropietario")
-    public ResponseEntity<Propietario> crearPropietario(Propietario propietario){
+    public ResponseEntity<Propietario> crearPropietario(@RequestBody Propietario propietario){
 
         Propietario nuevoPropietario = propietarioService.crearPropietario(propietario);
         return ResponseEntity.status(HttpStatus.CREATED).body(nuevoPropietario);
 
     }
 
-    @DeleteMapping("/eliminarMascota/{id}")
+    @DeleteMapping("/eliminarPropietario/{id}")
     public ResponseEntity<Void> eliminarPropietario(@PathVariable Long id) {
         propietarioService.eliminarPropietario(id);
         return ResponseEntity.noContent().build();

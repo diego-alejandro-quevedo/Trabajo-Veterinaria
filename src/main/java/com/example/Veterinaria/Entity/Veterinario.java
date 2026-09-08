@@ -1,10 +1,13 @@
 package com.example.Veterinaria.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +46,9 @@ public class Veterinario {
     private String correo;
 
     @ManyToMany(mappedBy = "veterinarios")
+    @JsonBackReference // Le indica a Jackson que no vuelva a serializar el Propietario
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private List<Mascota> mascotas = new ArrayList<>();
 
 }

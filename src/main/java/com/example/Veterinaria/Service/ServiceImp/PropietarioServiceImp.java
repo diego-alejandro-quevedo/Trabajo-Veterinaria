@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -24,8 +23,9 @@ public class PropietarioServiceImp implements PropietarioService {
     }
 
     @Override
-    public Optional<Propietario> buscarPropietarioPorId(Long id) {
-        return propietarioRepository.findById(id);
+    public Propietario buscarPropietarioPorId(Long id) {
+        return propietarioRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Propietario no encontrado con el id: " + id));
     }
 
     @Override
@@ -44,17 +44,28 @@ public class PropietarioServiceImp implements PropietarioService {
 
     @Override
     public Propietario actualizarPropietario(Long id, Propietario propietario) {
-        // 1. Buscar la entidad existente en la BD (esta SÍ tiene el ID)
+        // 1. Buscar la entidad existente en la BD
         Propietario propietarioac = propietarioRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Propietario no encontrado con el id: " + id));
 
-        // 2. Copiar los datos NUEVOS (propietario) hacia la entidad de la BD (propietarioac)
-        propietarioac.setNombre(propietario.getNombre());
-        propietarioac.setDocumento(propietario.getDocumento());
-        propietarioac.setTelefono(propietario.getTelefono());
-        propietarioac.setCorreo(propietario.getCorreo());
+        // 2. Copiar los datos solo si vienen presentes en el body
+        if (propietario.getNombre() != null && !propietario.getNombre().isBlank()) {
+            propietarioac.setNombre(propietario.getNombre());
+        }
 
-        // 3. Guardar la entidad de la BD para que JPA ejecute un UPDATE
+        if (propietario.getDocumento() != null && !propietario.getDocumento().isBlank()) {
+            propietarioac.setDocumento(propietario.getDocumento());
+        }
+
+        if (propietario.getTelefono() != null && !propietario.getTelefono().isBlank()) {
+            propietarioac.setTelefono(propietario.getTelefono());
+        }
+
+        if (propietario.getCorreo() != null && !propietario.getCorreo().isBlank()) {
+            propietarioac.setCorreo(propietario.getCorreo());
+        }
+
+        // 3. Guardar la entidad de la BD
         return propietarioRepository.save(propietarioac);
     }
 }

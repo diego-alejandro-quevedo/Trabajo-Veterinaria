@@ -1,7 +1,6 @@
 package com.example.Veterinaria.Service;
 
 import com.example.Veterinaria.Entity.HistoriaClinica;
-import com.example.Veterinaria.Entity.Veterinario;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,7 +25,7 @@ public interface HistoriaService {
 
 // Actualizar datos Historia
 
-    Veterinario actualizarHistoria(Long id, HistoriaClinica historia);
+    HistoriaClinica actualizarHistoria(Long id, HistoriaClinica historia);
 
 }
 

@@ -3,6 +3,7 @@ package com.example.Veterinaria.Entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
@@ -35,10 +36,10 @@ public class Mascota {
     @Column(name= "raza",nullable = false)
     private String raza;
 
-    @NotBlank(message = "la edad no puede ser nulo")
+    @NotNull(message = "la edad no puede ser nulo")
     private Integer edad;
 
-    @NotBlank(message = "El nombre no puede ser nulo")
+    @NotNull(message = "El peso no puede ser nulo")
     private double peso;
 
     @ManyToOne

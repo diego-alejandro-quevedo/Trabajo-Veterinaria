@@ -39,15 +39,18 @@ public class VeterinarioServiceImp implements VeterinarioService {
 
     @Override
     public Veterinario actualizarVeterinarios(Long id, Veterinario veterinario) {
+        // 1. Buscas la entidad existente en la BD (esta SÍ tiene ID)
         Veterinario veterinarioac = veterinarioRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Veterinario no encontrado con el id: " + id));
 
+        // 2. Actualizas la entidad persistida con los datos que vienen en la petición
+        veterinarioac.setNombre(veterinario.getNombre());
+        veterinarioac.setTargetaProfecional(veterinario.getTargetaProfecional());
+        veterinarioac.setEspecialidad(veterinario.getEspecialidad());
+        veterinarioac.setCorreo(veterinario.getCorreo());
 
-        veterinario.setNombre(veterinarioac.getNombre());
-        veterinario.setTargetaProfecional(veterinarioac.getTargetaProfecional());
-        veterinario.setEspecialidad(veterinarioac.getEspecialidad());
-        veterinario.setCorreo(veterinarioac.getCorreo());
-
-        return veterinarioRepository.save(veterinario);
+        // 3. Guardas la entidad recuperada (JPA detectará el ID y ejecutará UPDATE)
+        return veterinarioRepository.save(veterinarioac);
     }
 }
+

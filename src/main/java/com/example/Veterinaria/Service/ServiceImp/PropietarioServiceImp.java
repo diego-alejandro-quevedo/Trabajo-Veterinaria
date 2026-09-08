@@ -44,16 +44,18 @@ public class PropietarioServiceImp implements PropietarioService {
 
     @Override
     public Propietario actualizarPropietario(Long id, Propietario propietario) {
+        // 1. Buscar la entidad existente en la BD (esta SÍ tiene el ID)
         Propietario propietarioac = propietarioRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Propietario no encontrado con el id: " + id));
 
-        // Actualiza los campos necesarios según los atributos de tu entidad Propietario
-        propietario.setNombre(propietarioac.getNombre());
-        propietario.setDocumento(propietarioac.getDocumento());
-        propietario.setTelefono(propietarioac.getTelefono());
-        propietario.setCorreo(propietarioac.getCorreo());
+        // 2. Copiar los datos NUEVOS (propietario) hacia la entidad de la BD (propietarioac)
+        propietarioac.setNombre(propietario.getNombre());
+        propietarioac.setDocumento(propietario.getDocumento());
+        propietarioac.setTelefono(propietario.getTelefono());
+        propietarioac.setCorreo(propietario.getCorreo());
 
-        return propietarioRepository.save(propietario);
+        // 3. Guardar la entidad de la BD para que JPA ejecute un UPDATE
+        return propietarioRepository.save(propietarioac);
     }
 }
 

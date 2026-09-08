@@ -2,7 +2,7 @@ package com.example.Veterinaria.Service.ServiceImp;
 
 
 import com.example.Veterinaria.Entity.HistoriaClinica;
-import com.example.Veterinaria.Entity.Veterinario;
+import com.example.Veterinaria.Exception.ResourceNotFoundException;
 import com.example.Veterinaria.Repository.HistoriaRepository;
 import com.example.Veterinaria.Service.HistoriaService;
 import lombok.AllArgsConstructor;
@@ -43,7 +43,21 @@ public class HistoriaServiceImp implements HistoriaService {
     }
 
     @Override
-    public Veterinario actualizarHistoria(Long id, HistoriaClinica historia) {
-        return null;
+    public HistoriaClinica actualizarHistoria(Long id, HistoriaClinica historia) {
+
+        HistoriaClinica historiaClinica = historiaRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Historia clínica no encontrada con el id: " + id));
+
+        historiaClinica.setFechaApertura(historiaClinica.getFechaApertura());
+        historiaClinica.setAntecedente(historiaClinica.getAntecedente());
+        historiaClinica.setObservacion(historiaClinica.getObservacion());
+
+        // Si la historia clínica está asociada a una Mascota o un Veterinario y necesitas permitir su actualización:
+        if (historiaClinica.getMascota() != null) {
+            historiaClinica.setMascota(historiaClinica.getMascota());
+        }
+
+        return historiaRepository.save(historiaClinica);
+
     }
 }

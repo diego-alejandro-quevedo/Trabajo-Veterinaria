@@ -23,7 +23,7 @@ public class Propietario {
 
 
     @NotBlank(message = "El nombre no puede ser nulo")
-    @Size(min =2 ,max =20 )
+    @Size(min =2 ,max =50 )
     @Column(name= "nombre",nullable = false)
     private String nombre;
 

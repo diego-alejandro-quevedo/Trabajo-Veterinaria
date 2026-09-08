@@ -36,7 +36,7 @@ public class MascotaController {
     }
 
     @PostMapping("/crearMascota")
-    public ResponseEntity<Mascota> crearMascota(Mascota mascota){
+    public ResponseEntity<Mascota> crearMascota(@RequestBody Mascota mascota){
 
         Mascota nuevaMascota = mascotaService.crearMascota(mascota);
 

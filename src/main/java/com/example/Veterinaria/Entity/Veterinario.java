@@ -22,18 +22,18 @@ public class Veterinario {
 
 
     @NotBlank(message = "El nombre no puede ser nulo")
-    @Size(min =2 ,max =20 )
+    @Size(min =2 ,max =50 )
     @Column(name= "nombre",nullable = false)
     private String nombre;
 
 
     @NotBlank(message = "La targeta no puede ser nulo")
-    @Size(min =8 ,max =10 )
+    @Size(min =8 ,max =20 )
     @Column(name= "TargetaProfecional",nullable = false)
     private String targetaProfecional;
 
     @NotBlank(message = "El Especialidad no puede ser nulo")
-    @Size(min =10 ,max =10 )
+    @Size(min = 3, max = 50, message = "La especialidad debe tener entre 3 y 50 caracteres")
     @Column(name= "Especialidad",nullable = false)
     private String Especialidad;
 

@@ -47,6 +47,12 @@ public class HistoriaController {
         return ResponseEntity.noContent().build();
     }
 
+    @PutMapping("/actualizarHistoria/{id}")
+    public ResponseEntity<HistoriaClinica> actualizarHistoriaClinica(@PathVariable Long id, @RequestBody HistoriaClinica historia) {
+        HistoriaClinica historiaActualizada = historiaService.actualizarHistoria(id, historia);
+        return ResponseEntity.ok(historiaActualizada);
+    }
+
 
 
 }

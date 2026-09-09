@@ -6,6 +6,7 @@ import com.example.Veterinaria.Repository.PropietarioRepository;
 import com.example.Veterinaria.Service.PropietarioService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -43,6 +44,7 @@ public class PropietarioServiceImp implements PropietarioService {
     }
 
     @Override
+    @Transactional
     public Propietario actualizarPropietario(Long id, Propietario propietario) {
         // 1. Buscar la entidad existente en la BD
         Propietario propietarioac = propietarioRepository.findById(id)

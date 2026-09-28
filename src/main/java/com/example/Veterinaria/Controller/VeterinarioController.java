@@ -4,6 +4,7 @@ package com.example.Veterinaria.Controller;
 import com.example.Veterinaria.Entity.Veterinario;
 import com.example.Veterinaria.Service.VeterinarioService;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,6 @@ import java.util.List;
 @AllArgsConstructor
 
 @RequestMapping("api/veterinario")
-
 public class VeterinarioController {
 
     private final VeterinarioService veterinarioService;

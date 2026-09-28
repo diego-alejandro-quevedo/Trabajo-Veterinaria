@@ -4,6 +4,7 @@ package com.example.Veterinaria.Controller;
 import com.example.Veterinaria.Entity.Propietario;
 import com.example.Veterinaria.Service.PropietarioService;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +16,6 @@ import java.util.Optional;
 @AllArgsConstructor
 
 @RequestMapping("api/propietario")
-
 public class PropietarioController {
 
     private final PropietarioService propietarioService;
